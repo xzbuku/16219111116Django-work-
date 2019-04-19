@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <style type="text/css">
+        img {
+            max-height: 100%;
+
+        }
+    </style>
+</head>
+<body>
+
+
+
+<ul class="list-group">
+    {% for i in ls.object_list %}
+    <li class="list-group-item">
+    <div class="row">
+        <div class="col-md-2"><img src="{{ i.imgsrc }}" alt=""></div>
+        <div class="col-md-10">
+            <ul class="list-group-item" style="border: none">
+                <li class="list-group-item">描述:{{ i.title }}</li>
+                <li class="list-group-item">价格:{{ i.price }}</li>
+
+            </ul>
+        </div>
+    </div>
+    </li>
+        {% empty %}
+        wu
+    {% endfor %}
+</ul>
+<footer class="navbar-fixed-bottom">
+<ul id="choese" style="position: relative; left: 40%; z-index: 99" >
+<li style="display: inline-block; margin-left: 5px"><a href="{{ ls.number|add:-1 }}">上一页</a></li>
+    {% for i in ls.paginator.page_range %}
+        <li  style="display: inline-block; margin-left: 5px"><a href="{{ i }}">{{ i }}</a></li>
+        {% empty %}
+        kong
+    {% endfor %}
+<li style="display: inline-block; margin-left: 5px"><a href="{{ ls.number|add:1 }}">下一页</a></li>
+</ul>
+</footer>
+</body>
+</html>
